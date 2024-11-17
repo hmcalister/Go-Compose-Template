@@ -1,4 +1,4 @@
-module github.com/hmcalister/GoDockerComposeTemplate
+module github.com/hmcalister/Go-Compose-Template
 
 go 1.23.0
 
