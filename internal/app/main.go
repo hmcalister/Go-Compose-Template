@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/hmcalister/GoDockerComposeTemplate/internal/app/database"
+	"github.com/hmcalister/Go-Compose-Template/internal/app/database"
 	"github.com/jackc/pgx/v5"
 )
 
