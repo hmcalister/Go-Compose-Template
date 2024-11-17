@@ -13,3 +13,11 @@ This template provides a Makefile to help set up and manage the various systems.
 - `make build` runs the above commands in order, preparing the application to be run.
 - `make run` first runs `make build` then `docker compose up` to start the application --- this effectively replaces `go run .` in your debugging step. 
 
+
+
+### Logging and Debugging
+
+This template uses `slog` to log events in the application. By default the log level is set to `INFO` and logs are written in JSON format to a file that is mounted to the host file-system at `./logs/log`. 
+
+An environment variable `DEBUG` is checked when the container starts up, and can be set in the `compose.yaml`. If this variable is set, logging is instead set to level `DEBUG` and logs are written as text directly to `stdout`.
+
