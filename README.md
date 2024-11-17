@@ -21,3 +21,8 @@ This template uses `slog` to log events in the application. By default the log l
 
 An environment variable `DEBUG` is checked when the container starts up, and can be set in the `compose.yaml`. If this variable is set, logging is instead set to level `DEBUG` and logs are written as text directly to `stdout`.
 
+
+### TODO:
+
+- Add SSL to the Postgres database.
+- Prevent outside requests to Postgres database --- look into Docker Compose networking.
