@@ -7,7 +7,7 @@ An architecture template for an app using Golang. The server uses the [Chi](http
 This walkthrough is designed for Linux systems. Windows systems can follow the general thread but may need to substitute some commands.
 
 - First, create the file `secrets/postgres-password.secret` and add a password to it. This password is used by the database and app containers to improve security, but the secret file itself is not tracked.
-- Run `make build` (or, run each of `make sqlc`, `make app`, `make docker` separately, see below). This will download all Go dependencies and docker containers required to run the project.
+- Run `make -B build` (or, run each of `make sqlc`, `make app`, `make docker` separately, see below). This will download all Go dependencies and docker containers required to run the project.
 - Run `make run` to start the project with Docker Compose. 
     - On the first run, the database container will create a new database. This may not finish before the app container complains. If the app container is killed during the first `make run`, simply wait for the database to finish (a log message will inform you that the "database system is ready to accept connections") before stopping the process and calling `make run` again. If the app container still does not start up, try altering the healthcheck in `compose.yaml` or removing it entirely.
 - Once the containers have started up, the app container should log to stdout with the message "ready to serve".
