@@ -1,0 +1,56 @@
+services:
+  app-container:
+    build:
+      context: ./build
+    ports:
+      - "8080:8080"
+    depends_on:
+      database-container:
+        condition: service_healthy
+    environment:
+      DEBUG: "true"
+      DB_HOST: database-container
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD_FILE: /run/secrets/postgres-password
+      DB_NAME: app-database
+    secrets:
+      - postgres-password
+    volumes:
+      - type: bind
+        source: ./logs
+        target: /app/logs
+    networks:
+      - app-network
+
+  database-container:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres-password
+      POSTGRES_DB: app-database
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d app-database"]
+      timeout: 10s
+      interval: 1s
+      retries: 10
+    secrets:
+      - postgres-password
+    volumes:
+      - ./sqlc/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - database-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+secrets:
+  postgres-password:
+    file: ./secrets/postgres-password.secret
+
+networks:
+  app-network:
+
+
+volumes:
+  database-data:
