@@ -13,8 +13,8 @@ docker:
 	docker compose build
 
 dockerClean:
-	docker container ls -a --filter "name=^goapp" --format "{{.ID}}" | xargs docker container rm -f
-	docker volume ls --filter "name=^goapp" --format "{{.Name}}" | xargs docker volume rm -f
+	docker container ls -a --filter "name=^go-compose-template" --format "{{.ID}}" | xargs docker container rm -f
+	docker volume ls --filter "name=^go-compose-template" --format "{{.Name}}" | xargs docker volume rm -f
 
 dockerRun: dockerBuild
 	docker compose up
