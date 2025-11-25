@@ -3,7 +3,7 @@
 include secrets/.env
 export
 
-build: setup sqlcGenerate appBuild podmanBuild
+build: sqlcGenerate appBuild podmanBuild
 
 run: build podmanRun
 
