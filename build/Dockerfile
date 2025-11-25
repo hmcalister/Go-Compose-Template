@@ -12,10 +12,5 @@ RUN mkdir -p /app/logs && \
     chown -R appuser:appuser /app
 
 WORKDIR /app
-COPY --chown=appuser:appuser ./main /app/main
-RUN chmod +x /app/main
-
-
 USER appuser
-
 CMD ["/app/main"]

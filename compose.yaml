@@ -18,6 +18,10 @@ services:
         source: ./logs
         target: /app/logs
         read_only: false
+      - type: bind
+        source: ./build/main
+        target: /app/main
+        read_only: false
     networks:
       - app-network
     security_opt:
