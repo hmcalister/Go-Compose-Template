@@ -1,23 +1,24 @@
-build: sqlc app docker
+.PHONY: build run sqlcGenerate appBuild podmanBuild podmanClean podmanRun
 
-run: build
-	docker compose up
 include secrets/.env
 export
 
-sqlc:
+build: setup sqlcGenerate appBuild podmanBuild
+
+run: build podmanRun
+
+sqlcGenerate:
 	sqlc generate -f sqlc/sqlc.yaml
 
-app:
-	go build -o build/ ./internal/app
+appBuild:
+	go build -o build/ ./cmd/main.go
 
-docker: 
-	docker compose build
+podmanBuild:
+	podman compose build 
 
-dockerClean:
-	docker container ls -a --filter "name=^go-compose-template" --format "{{.ID}}" | xargs docker container rm -f
-	docker volume ls --filter "name=^go-compose-template" --format "{{.Name}}" | xargs docker volume rm -f
+podmanClean:
+	podman compose down -v
 
-dockerRun: dockerBuild
-	docker compose up
+podmanRun: podmanBuild
+	podman compose up --force-recreate
 
