@@ -22,3 +22,5 @@ podmanRun: podmanBuild
 podmanClean:
 	podman compose down
 
+podmanCleanAll:
+	podman compose down -v
