@@ -2,6 +2,8 @@ build: sqlc app docker
 
 run: build
 	docker compose up
+include secrets/.env
+export
 
 sqlc:
 	sqlc generate -f sqlc/sqlc.yaml
