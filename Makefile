@@ -11,7 +11,7 @@ sqlcGenerate:
 	sqlc generate -f sqlc/sqlc.yaml
 
 appBuild:
-	go build -o build/ ./cmd/main.go
+	go build -o build/main ./cmd/main.go
 
 podmanBuild:
 	podman compose build 
