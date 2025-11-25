@@ -14,11 +14,11 @@ appBuild:
 	go build -o build/main ./cmd/main.go
 
 podmanBuild:
-	podman compose build 
-
-podmanClean:
-	podman compose down -v
+	podman compose build
 
 podmanRun: podmanBuild
-	podman compose up --force-recreate
+	podman compose up
+
+podmanClean:
+	podman compose down
 
