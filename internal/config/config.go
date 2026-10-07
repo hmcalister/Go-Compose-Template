@@ -55,7 +55,7 @@ func Load() (Config, error) {
 func getRequiredEnv(key string) string {
 	value := os.Getenv(key)
 	if value == "" {
-		slog.Error("required environment variable %v is not set", key)
+		slog.Error("required environment variable is not set", "variable", key)
 		panic("required environment variable not set")
 	}
 	return value
@@ -64,7 +64,7 @@ func getRequiredEnv(key string) string {
 func toDurationStrict(durationStr string) time.Duration {
 	d, err := time.ParseDuration(durationStr)
 	if err != nil {
-		slog.Error("string %v could not be parsed to duration", durationStr)
+		slog.Error("string could not be parsed to duration", "durationStr", durationStr)
 		panic("invalid duration found in strict parsing")
 	}
 	return d
@@ -74,7 +74,7 @@ func toInt32Strict(intStr string) int32 {
 	var i int32
 	n, err := fmt.Sscanf(intStr, "%d", &i)
 	if err != nil || n != 1 {
-		slog.Error("string %v could not be parsed to int32", intStr)
+		slog.Error("string could not be parsed to int32", "intStr", intStr)
 		panic("invalid int32 found in strict parsing")
 	}
 	return i
